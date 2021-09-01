@@ -1,0 +1,92 @@
+[
+    {
+        "qustion": "What are the technical and additional skills that are needed to be a front-end developer?",
+        "1": "html",
+        "2": "css",
+        "3": "js",
+        "4": "all of them",
+        "correct": "all of them"
+        
+    },
+    {
+        "qustion": "What does HTML stand for?",
+        "1": "hyper text markup language",
+        "2": "hyperlinks and text markup language",
+        "3": "home tool markup language",
+        "4": "programing language",
+        "correct": "hyper text markup language"
+        
+    },
+    {
+        "qustion": "Who is making the Web standards?",
+        "1": "microsoft",
+        "2": "google",
+        "3": "the world wide web consortium",
+        "4": "mozilla",
+        "correct": "the world wide web consortium"
+        
+    },
+    {
+        "qustion": "Choose the correct HTML element for the largest heading:",
+        "1": "<h6>",
+        "2": "<h1>",
+        "3": "<head>",
+        "4": "<heading>",
+        "correct": "<h1>"
+        
+    },
+    {
+        "qustion": "What is the correct HTML element for inserting a line break?",
+        "1": "<lb>",
+        "2": "<hr>",
+        "3": "<break>",
+        "4": "<br>",
+        "correct": "<br>"
+        
+    },
+    {
+        "qustion": "Choose the correct HTML element to define important text",
+        "1": "<important>",
+        "2": "<i>",
+        "3": "<strong>",
+        "4": "<b>",
+        "correct": "<b>"
+        
+    },
+    {
+        "qustion": "Choose the correct HTML element to define emphasized text",
+        "1": "<italic>",
+        "2": "<i>",
+        "3": "<em>",
+        "4": "<b>",
+        "correct": "<em>"
+        
+    },
+    {
+        "qustion": "Which character is used to indicate an end tag?",
+        "1": "<",
+        "2": "^",
+        "3": "*",
+        "4": "/",
+        "correct": "/"
+        
+    },
+    {
+        "qustion": "Inside which HTML element do we put the JavaScript?",
+        "1": "<scripting>",
+        "2": "<javascript>",
+        "3": "<script>",
+        "4": "<js>",
+        "correct": "<script>"
+        
+    },   
+     {
+        "qustion": "How do you call a function named (myFunction) ?",
+        "1": "myFunction",
+        "2": "myFunction()",
+        "3": "call function myFunction()",
+        "4": "call myFunction()",
+        "correct": "myFunction()"
+        
+    }
+]
