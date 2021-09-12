@@ -3,7 +3,7 @@
  let parentSpanContainer = document.querySelector(".bullets .spans");
  let quizArea = document.querySelector(".quiz-area");
  let answersArea = document.querySelector(".answer-area")
-
+let submitBtn = document.querySelector(".submit-btn");
 //  set options 
 let currentIndex = 0;
 
@@ -19,6 +19,19 @@ let currentIndex = 0;
       
       // add qustion data 
       addQustionData(data[currentIndex],qustionlength)
+
+      //  click on submit btn 
+      submitBtn.addEventListener("click",()=>{
+
+        // get the right answer
+        let rightAnswer = data[currentIndex].correct;
+
+        // increase the current answer 
+        currentIndex++
+        
+        // check the answer 
+        checkAnswers(rightAnswer, qustionlength)
+      })
     } )
     .catch((error) => {
       console.error('Error:', error);
@@ -80,4 +93,8 @@ let currentIndex = 0;
         // add the main div to the answers area 
         answersArea.appendChild(mainDiv);
       }
+    }
+
+    function checkAnswers(rAnswer, count){
+      
     }
