@@ -6,6 +6,7 @@
 let submitBtn = document.querySelector(".submit-btn");
 //  set options 
 let currentIndex = 0;
+let rightAnswerCount = 0 ;
 
 //  fetch the local json api file 
   function getQustion(){
@@ -96,5 +97,16 @@ let currentIndex = 0;
     }
 
     function checkAnswers(rAnswer, count){
-      
+      let answers = document.getElementsByName("Qustion");
+      let theChosenAnswer;
+
+      for (let i=0; i<answers.length; i++){
+        if(answers[i].checked){
+          theChosenAnswer = answers[i].dataset.answer
+        }
+      }
+      if(rAnswer === theChosenAnswer){
+        rightAnswerCount++;
+       
+      }
     }
