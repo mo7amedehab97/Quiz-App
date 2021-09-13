@@ -1,9 +1,14 @@
 //  get the element to the js using dom to manipulating them 
  let qustionQount = document.querySelector(".count span");
+ let countSec = document.querySelector(".count");
+ let categorySec = document.querySelector(".category");
+
  let parentSpanContainer = document.querySelector(".bullets .spans");
  let quizArea = document.querySelector(".quiz-area");
  let answersArea = document.querySelector(".answer-area")
 let submitBtn = document.querySelector(".submit-btn");
+let bulletSec = document.querySelector(".bullets");
+let resultContainer = document.querySelector(".result")
 //  set options 
 let currentIndex = 0;
 let rightAnswerCount = 0 ;
@@ -23,6 +28,8 @@ let rightAnswerCount = 0 ;
 
       //  click on submit btn 
       submitBtn.addEventListener("click",()=>{
+   
+
 
         // get the right answer
         let rightAnswer = data[currentIndex].correct;
@@ -41,7 +48,10 @@ let rightAnswerCount = 0 ;
         addQustionData(data[currentIndex],qustionlength)
 
         // handele bullets class
-        handleBullets()
+        handleBullets();
+        
+        // show result 
+        showResult(qustionlength);
 
       })
     } )
@@ -67,44 +77,46 @@ let rightAnswerCount = 0 ;
     }
 
     function addQustionData(obj, count){
-      // create the structure for the qustions and set the qustion 
+    if(currentIndex < count){
+        // create the structure for the qustions and set the qustion 
 
-      let qustionTitle = document.createElement("h2");
-      qustionTitle.textContent= obj.qustion
-
-      // appernd h2 to it's container in html
-      quizArea.appendChild(qustionTitle);
-
-      // create structure for answers 
-      for (let i=1;i<=4;i++){
-
-        // create parent div for the answers
-        let mainDiv = document.createElement("div");
-
-        // add class answer to the main div to apply the existing styling 
-        mainDiv.className = 'answer';
-
-        // create readio inp and set all atrributes to it 
-        let readioInp = document.createElement("input");
-        readioInp.name = "Qustion"
-        readioInp.type = "radio";
-        readioInp.id = `${i}`
-        readioInp.dataset.answer = obj[`${i}`];
-
-        // create the labels 
-        let theLabel = document.createElement("label");
-
-        // add attribuetes for label
-        theLabel.htmlFor = `${i}`;
-        theLabel.textContent = obj[`${i}`];
-        
-        // add the inp + label to the main div 
-        mainDiv.appendChild(readioInp);
-        mainDiv.appendChild(theLabel);
-
-        // add the main div to the answers area 
-        answersArea.appendChild(mainDiv);
-      }
+        let qustionTitle = document.createElement("h2");
+        qustionTitle.textContent= obj.qustion
+  
+        // appernd h2 to it's container in html
+        quizArea.appendChild(qustionTitle);
+  
+        // create structure for answers 
+        for (let i=1;i<=4;i++){
+  
+          // create parent div for the answers
+          let mainDiv = document.createElement("div");
+  
+          // add class answer to the main div to apply the existing styling 
+          mainDiv.className = 'answer';
+  
+          // create readio inp and set all atrributes to it 
+          let readioInp = document.createElement("input");
+          readioInp.name = "Qustion"
+          readioInp.type = "radio";
+          readioInp.id = `${i}`
+          readioInp.dataset.answer = obj[`${i}`];
+  
+          // create the labels 
+          let theLabel = document.createElement("label");
+  
+          // add attribuetes for label
+          theLabel.htmlFor = `${i}`;
+          theLabel.textContent = obj[`${i}`];
+          
+          // add the inp + label to the main div 
+          mainDiv.appendChild(readioInp);
+          mainDiv.appendChild(theLabel);
+  
+          // add the main div to the answers area 
+          answersArea.appendChild(mainDiv);
+        }
+    }
     }
 
     function checkAnswers(rAnswer, count){
@@ -125,7 +137,7 @@ let rightAnswerCount = 0 ;
     function handleBullets(){
       let bulletSpans = document.querySelectorAll(".bullets .spans span");
       let arrOfSpans = Array.from(bulletSpans)
-      console.log(arrOfSpans)
+      // console.log(arrOfSpans)
       arrOfSpans.forEach((span, index)=>{
         if(currentIndex === index){
           span.className ="on"
@@ -135,4 +147,37 @@ let rightAnswerCount = 0 ;
         }
 
       })
+    }
+
+    function showResult(count){
+      let theResult;
+
+
+      if(currentIndex === count){
+
+        // clear qustion area to show the result 
+        quizArea.remove();
+        answersArea.remove();
+        submitBtn.remove();
+        bulletSec.remove();
+        countSec.remove();
+        categorySec.remove()
+        
+        // the result 
+
+        if(rightAnswerCount > (count /2) && rightAnswerCount < count){
+             theResult = `<span class="good"> good</span>, ${rightAnswerCount} from ${count} is good`
+        }
+        else if(rightAnswerCount === count){
+          theResult = `<span class="perfect"> perfect</span>, ${rightAnswerCount} from ${count} is amazing man`
+        }
+        else{
+           theResult = `<span class="bad"> bad</span>, ${rightAnswerCount} from ${count} is sucks keep learning bro`
+        }
+        resultContainer.innerHTML =theResult;
+
+      }
+
+      console.log(rightAnswerCount ,count)
+
     }
