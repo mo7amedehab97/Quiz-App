@@ -99,9 +99,6 @@ body{
 .quiz-app .bullets .spans span.on{
     background-color: #0075ff;
 }
-.quiz-app .bullets .spans span.off{
-    background-color: #DDD;
-}
 .quiz-app .result span{
     font-weight: bold;
 }
