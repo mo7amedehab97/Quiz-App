@@ -32,6 +32,17 @@ let rightAnswerCount = 0 ;
         
         // check the answer 
         checkAnswers(rightAnswer, qustionlength)
+
+        //  empty the previous qustion 
+        quizArea.textContent="";
+        answersArea.textContent="";
+
+        // add qustion data function 
+        addQustionData(data[currentIndex],qustionlength)
+
+        // handele bullets class
+        handleBullets()
+
       })
     } )
     .catch((error) => {
@@ -109,4 +120,19 @@ let rightAnswerCount = 0 ;
         rightAnswerCount++;
        
       }
+    }
+
+    function handleBullets(){
+      let bulletSpans = document.querySelectorAll(".bullets .spans span");
+      let arrOfSpans = Array.from(bulletSpans)
+      console.log(arrOfSpans)
+      arrOfSpans.forEach((span, index)=>{
+        if(currentIndex === index){
+          span.className ="on"
+        }
+        else{
+          span.className = "off"
+        }
+
+      })
     }
