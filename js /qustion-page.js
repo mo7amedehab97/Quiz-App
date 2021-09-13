@@ -2,16 +2,18 @@
  let qustionQount = document.querySelector(".count span");
  let countSec = document.querySelector(".count");
  let categorySec = document.querySelector(".category");
-
  let parentSpanContainer = document.querySelector(".bullets .spans");
  let quizArea = document.querySelector(".quiz-area");
- let answersArea = document.querySelector(".answer-area")
+ let answersArea = document.querySelector(".answer-area");
 let submitBtn = document.querySelector(".submit-btn");
 let bulletSec = document.querySelector(".bullets");
-let resultContainer = document.querySelector(".result")
+let resultContainer = document.querySelector(".result");
+let countDownElement = document.querySelector(".countdown");
+
 //  set options 
 let currentIndex = 0;
 let rightAnswerCount = 0 ;
+let countDownInterval;
 
 //  fetch the local json api file 
   function getQustion(){
@@ -25,6 +27,9 @@ let rightAnswerCount = 0 ;
       
       // add qustion data 
       addQustionData(data[currentIndex],qustionlength)
+
+      // start countdown 
+      countDown(5, qustionlength)
 
       //  click on submit btn 
       submitBtn.addEventListener("click",()=>{
@@ -49,6 +54,10 @@ let rightAnswerCount = 0 ;
 
         // handele bullets class
         handleBullets();
+
+         //clear the interval to  start new countdown 
+         clearInterval(countDownInterval)
+      countDown(5, qustionlength)
         
         // show result 
         showResult(qustionlength);
@@ -163,7 +172,7 @@ let rightAnswerCount = 0 ;
         countSec.remove();
         categorySec.remove()
         
-        // the result 
+        // make result structure 
 
         if(rightAnswerCount > (count /2) && rightAnswerCount < count){
              theResult = `<span class="good"> good</span>, ${rightAnswerCount} from ${count} is good`
@@ -174,10 +183,36 @@ let rightAnswerCount = 0 ;
         else{
            theResult = `<span class="bad"> bad</span>, ${rightAnswerCount} from ${count} is sucks keep learning bro`
         }
+
         resultContainer.innerHTML =theResult;
 
       }
 
-      console.log(rightAnswerCount ,count)
+    }
+    function countDown(duration, count){
+      if(currentIndex < count){
 
+        let min,sec;
+
+        countDownInterval = setInterval(() => {
+          // get the minetes 
+          min = parseInt(duration / 60)
+
+          // get the seconds 
+          sec = parseInt(duration % 60)
+
+          // in case sec and min less than 10
+            min =min<10 ?`0${min}` : min;
+            sec =sec<10 ?`0${sec}` : sec;
+
+          // update the countdown content with dynamic time
+          countDownElement.textContent = `${min} : ${sec}`
+
+          // to make sure that the countdown will not becon=meing negarive values
+          if(--duration < 0){
+            clearInterval(countDownInterval)
+            submitBtn.click()
+          }
+        }, 1000);
+      }
     }
