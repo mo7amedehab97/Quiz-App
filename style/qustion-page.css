@@ -9,8 +9,9 @@ body{
     justify-content: center;
     align-items: center;
 }
+
 .quiz-app{
-    margin: 100px auto;
+    margin: 50px;
     width: 800px;
     background-color: #f8f8f8f8;
     padding: 15px;

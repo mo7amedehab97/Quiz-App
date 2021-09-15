@@ -1,7 +1,7 @@
 //  get the element to the js using dom to manipulating them 
  let qustionQount = document.querySelector(".count span");
  let countSec = document.querySelector(".count");
- let categorySec = document.querySelector(".category");
+ let usernameSec = document.querySelector(".user-name");
 
  let parentSpanContainer = document.querySelector(".bullets .spans");
  let quizArea = document.querySelector(".quiz-area");
@@ -9,9 +9,13 @@
 let submitBtn = document.querySelector(".submit-btn");
 let bulletSec = document.querySelector(".bullets");
 let resultContainer = document.querySelector(".result")
+let useNameElement =document.querySelector(".user-name span")
 //  set options 
 let currentIndex = 0;
 let rightAnswerCount = 0 ;
+let userName = localStorage.getItem("userName");
+
+useNameElement.textContent = userName;
 
 //  fetch the local json api file 
   function getQustion(){
@@ -161,7 +165,7 @@ let rightAnswerCount = 0 ;
         submitBtn.remove();
         bulletSec.remove();
         countSec.remove();
-        categorySec.remove()
+        usernameSec.remove()
         
         // the result 
 
