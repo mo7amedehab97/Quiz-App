@@ -1,19 +1,26 @@
 //  get the element to the js using dom to manipulating them 
  let qustionQount = document.querySelector(".count span");
  let countSec = document.querySelector(".count");
- let categorySec = document.querySelector(".category");
+ let usernameSec = document.querySelector(".user-name");
  let parentSpanContainer = document.querySelector(".bullets .spans");
  let quizArea = document.querySelector(".quiz-area");
  let answersArea = document.querySelector(".answer-area");
 let submitBtn = document.querySelector(".submit-btn");
 let bulletSec = document.querySelector(".bullets");
-let resultContainer = document.querySelector(".result");
+let resultContainer = document.querySelector(".result")
+let useNameElement =document.querySelector(".user-name span")
+let quizInfoSec = document.querySelector(".quiz-info")
+let returnBtn = document.querySelector(".return-btn")
 let countDownElement = document.querySelector(".countdown");
 
 //  set options 
 let currentIndex = 0;
 let rightAnswerCount = 0 ;
 let countDownInterval;
+let userName = localStorage.getItem("userName");
+useNameElement.textContent = userName;
+
+
 
 //  fetch the local json api file 
   function getQustion(){
@@ -29,7 +36,7 @@ let countDownInterval;
       addQustionData(data[currentIndex],qustionlength)
 
       // start countdown 
-      countDown(5, qustionlength)
+      countDown(120, qustionlength)
 
       //  click on submit btn 
       submitBtn.addEventListener("click",()=>{
@@ -170,18 +177,21 @@ let countDownInterval;
         submitBtn.remove();
         bulletSec.remove();
         countSec.remove();
-        categorySec.remove()
+        usernameSec.remove()
+        quizInfoSec.remove();
+
+        returnBtn.style.display = "flex"
         
         // make result structure 
 
         if(rightAnswerCount > (count /2) && rightAnswerCount < count){
-             theResult = `<span class="good"> good</span>, ${rightAnswerCount} from ${count} is good`
+             theResult = `<span class="good"> good result ${userName}</span>, ${rightAnswerCount} from ${count} is good`
         }
         else if(rightAnswerCount === count){
-          theResult = `<span class="perfect"> perfect</span>, ${rightAnswerCount} from ${count} is amazing man`
+          theResult = `<span class="perfect"> perfect result ${userName}</span>, ${rightAnswerCount} from ${count} is amazing man`
         }
         else{
-           theResult = `<span class="bad"> bad</span>, ${rightAnswerCount} from ${count} is sucks keep learning bro`
+           theResult = `<span class="bad"> bad result ${userName}</span>, ${rightAnswerCount} from ${count} is sucks keep learning bro`
         }
 
         resultContainer.innerHTML =theResult;
@@ -200,19 +210,25 @@ let countDownInterval;
 
           // get the seconds 
           sec = parseInt(duration % 60)
+     // in case sec and min less than 10
+     min =min<10 ?`0${min}` : min;
+     sec =sec<10 ?`0${sec}` : sec;
 
-          // in case sec and min less than 10
-            min =min<10 ?`0${min}` : min;
-            sec =sec<10 ?`0${sec}` : sec;
+   // update the countdown content with dynamic time
+   countDownElement.textContent = `${min} : ${sec}`
 
-          // update the countdown content with dynamic time
-          countDownElement.textContent = `${min} : ${sec}`
-
-          // to make sure that the countdown will not becon=meing negarive values
-          if(--duration < 0){
-            clearInterval(countDownInterval)
-            submitBtn.click()
-          }
-        }, 1000);
-      }
-    }
+   // to make sure that the countdown will not becon=meing negarive values
+   if(--duration < 0){
+     clearInterval(countDownInterval)
+     submitBtn.click()
+   }
+ }, 1000);
+}
+}
+ 
+    
+    //  handle the back home btn 
+    returnBtn.addEventListener("click", ()=>{
+      window.location="../index.html"
+      returnBtn.style.display = "none"
+    })
