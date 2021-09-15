@@ -10,6 +10,8 @@ let submitBtn = document.querySelector(".submit-btn");
 let bulletSec = document.querySelector(".bullets");
 let resultContainer = document.querySelector(".result")
 let useNameElement =document.querySelector(".user-name span")
+let quizInfoSec = document.querySelector(".quiz-info")
+let returnBtn = document.querySelector(".return-btn")
 //  set options 
 let currentIndex = 0;
 let rightAnswerCount = 0 ;
@@ -166,17 +168,20 @@ useNameElement.textContent = userName;
         bulletSec.remove();
         countSec.remove();
         usernameSec.remove()
+        quizInfoSec.remove();
+
+        returnBtn.style.display = "flex"
         
         // the result 
 
         if(rightAnswerCount > (count /2) && rightAnswerCount < count){
-             theResult = `<span class="good"> good</span>, ${rightAnswerCount} from ${count} is good`
+             theResult = `<span class="good"> good result ${userName}</span>, ${rightAnswerCount} from ${count} is good`
         }
         else if(rightAnswerCount === count){
-          theResult = `<span class="perfect"> perfect</span>, ${rightAnswerCount} from ${count} is amazing man`
+          theResult = `<span class="perfect"> perfect result ${userName}</span>, ${rightAnswerCount} from ${count} is amazing man`
         }
         else{
-           theResult = `<span class="bad"> bad</span>, ${rightAnswerCount} from ${count} is sucks keep learning bro`
+           theResult = `<span class="bad"> bad result ${userName}</span>, ${rightAnswerCount} from ${count} is sucks keep learning bro`
         }
         resultContainer.innerHTML =theResult;
 
@@ -185,3 +190,9 @@ useNameElement.textContent = userName;
       console.log(rightAnswerCount ,count)
 
     }
+    
+    //  handle the back home btn 
+    returnBtn.addEventListener("click", ()=>{
+      window.location="../index.html"
+      returnBtn.style.display = "none"
+    })
